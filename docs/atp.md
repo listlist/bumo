@@ -36,23 +36,8 @@ ATP1.0(Account based Tokenization Protocol) 指基于 BuChain的账号结构对�
 
 ## 操作过程
 
-### 发行Token  
-1.客户端通过发起一笔操作类型是`Issuing Assets`的交易。设置参数amount(发行的数量)、code(Token代码)。  
-例如：发行一笔数量是10000,精度为8的的DT Token。
-
-- json格式
-
-    ```json
-    {
-      "type": 2,
-      "issue_asset": {
-        "amount": 1000000000000,
-        "code": "DT"
-      }
-    }
-    ```
-
-2.接着继续发送`Setting Metadata`的交易，设置Token metadata参数key、value和version。如下例子：  
+### 登记Token
+发送`Setting Metadata`的交易，设置Token metadata参数key、value和version。如下例子：  
 - json格式
 
     ```JSON
@@ -67,9 +52,24 @@ ATP1.0(Account based Tokenization Protocol) 指基于 BuChain的账号结构对�
     }
     ```
 注意：
-- key值必须是asset_property_前缀和code的组合。  
+- key值必须是asset_property_前缀和Token code的组合(参考[发行Token](#发行token)的 `code` 参数)。  
 设置成功后通过[查询指定metadata](#查询指定metadata)可以看到metadata设置的数据。
 
+### 发行Token  
+客户端通过发起一笔操作类型是`Issuing Assets`的交易。设置参数amount(发行的数量)、code(Token代码)。  
+例如：发行一笔数量是10000,精度为8的的DT Token。
+
+- json格式
+
+    ```json
+    {
+      "type": 2,
+      "issue_asset": {
+        "amount": 1000000000000,
+        "code": "DT"
+      }
+    }
+    ```
 
 ### 转移Token  
 1.设置参数，发送`Transferring Assets`的交易。  
