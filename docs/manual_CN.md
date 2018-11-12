@@ -528,31 +528,31 @@ p2p 的 known_peers 必须为其他已知节点的 IP 和端口，用于节点�
 ```bash
 [root@bumo ~]# curl 127.0.0.1:36002/getModulesStatus
 {
-    "glue_manager":{
-        "cache_topic_size":0,
-        "ledger_upgrade":{
-            "current_states":null,
-            "local_state":null
-        },
-        "system":{
-            "current_time":"2017-07-20 10:32:22", //当前系统时间
-            "process_uptime":"2017-07-20 09:35:06", //bumo启动时间
-            "uptime":"2017-05-14 23:51:04"
-        },
-        "time":"0 ms",
-        "transaction_size":0
+"glue_manager":{
+    "cache_topic_size":0,
+    "ledger_upgrade":{
+        "current_states":null,
+        "local_state":null
     },
-    "keyvalue_db":Object{...},
-    "ledger_db":Object{...},
-    "ledger_manager":{
-        "account_count":2316,  //账户数
-        "hash_type":"sha256",
-        "ledger_sequence":12187,
-        "time":"0 ms",
-        "tx_count":1185   //交易数
+    "system":{
+        "current_time":"2017-07-20 10:32:22", //当前系统时间
+        "process_uptime":"2017-07-20 09:35:06", //bumo启动时间
+        "uptime":"2017-05-14 23:51:04"
     },
-    "peer_manager":Object{...},
-    "web server":Object{...},
+    "time":"0 ms",
+    "transaction_size":0
+},
+"keyvalue_db":Object{...},
+"ledger_db":Object{...},
+"ledger_manager":{
+    "account_count":2316,  //账户数
+    "hash_type":"sha256",
+    "ledger_sequence":12187,
+    "time":"0 ms",
+    "tx_count":1185   //交易数
+},
+"peer_manager":Object{...},
+"web server":Object{...},
 
 ```
 
@@ -574,15 +574,15 @@ Create hard fork ledger successful, seq(20), consensus value hash(**7aa332f05748
 - 把上述 Hash 值配置到本节点或者同步节点的 bumo.json 的hardfork_points
 
 ```json
-    "ledger":
-    {
-       	"genesis_account": "buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3",
-        "max_trans_per_ledger": 1000,
-        "hardfork_points" : 
-        [
-        	"7aa332f05748e6ce9ad3d059c959a50675109bcaf0a4ba2c5c6adc6418960197"
-        ]
-    },
+"ledger":
+{
+  	 "genesis_account": "buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3",
+     "max_trans_per_ledger": 1000,
+     "hardfork_points" : 
+     [
+        "7aa332f05748e6ce9ad3d059c959a50675109bcaf0a4ba2c5c6adc6418960197"
+     ]
+},
 ```
 
 - 启动节点服务即可生效
