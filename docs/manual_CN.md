@@ -131,11 +131,11 @@ make install
 解压
 
 拷贝 buchain-`1.0.0.x`-linux-x64.tar.gz 到 /usr/local/
-
-    cd /usr/local/
-    #需要注意用实际版本包 1.0.0.x 的名字
-    tar xzvf buchain-1.0.0.x-linux-x64.tar.gz
-
+```bash
+cd /usr/local/
+#需要注意用实际版本包 1.0.0.x 的名字
+tar xzvf buchain-1.0.0.x-linux-x64.tar.gz
+...
 注册服务
 
     ln -s /usr/local/buchain/scripts/bumo /etc/init.d/bumo 
@@ -321,7 +321,7 @@ bumo.json
 ```
 
 `validation_address` 和 `validation_private_key` 可以通过 bumo 程序命令行工具获得，请妥善保存该账号信息，丢失后将无法找回。
-```
+```bash
     [root@bumo ~]# cd /usr/local/buchain/bin
     [root@bumo bin]#./bumo --create-account
 
