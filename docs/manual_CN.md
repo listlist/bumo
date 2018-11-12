@@ -137,35 +137,35 @@ cd /usr/local/
 tar xzvf buchain-1.0.0.x-linux-x64.tar.gz
 ```
 注册服务
-
+```bash
     ln -s /usr/local/buchain/scripts/bumo /etc/init.d/bumo 
     ln -s /usr/local/buchain/scripts/bumod /etc/init.d/bumod 
-
+```
 修改服务启动路径
 
 打开 ./buchain/scripts/bumo 和 ./buchain/scripts/bumod 
 
 将 `install_dir` 变量值修改成安装 Buchain 安装路径 
-
+```bash
     install_dir=/usr/local/buchain 
-
+```
 设置开机启动
-
+```bash
     #分别执行如下命令（级别1~5）
     ln -s -f /etc/init.d/bumod /etc/rc1.d/S99bumod 
     ln -s -f /etc/init.d/bumod /etc/rc2.d/S99bumod 
     ln -s -f /etc/init.d/bumod /etc/rc3.d/S99bumod 
     ln -s -f /etc/init.d/bumod /etc/rc4.d/S99bumod 
     ln -s -f /etc/init.d/bumod /etc/rc5.d/S99bumod 
-
+```
 在 `/etc/rc.local` 文件末尾追加如下命令
-
+```bash
     /etc/init.d/bumod start
-
+```
 保存后添加执行可执行权限： 
-
+```bash
     chmod +x /etc/rc.local
-
+```
 安装完成。
 
 ### MAC下的安装步骤
