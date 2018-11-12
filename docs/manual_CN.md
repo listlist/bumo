@@ -135,7 +135,7 @@ make install
 cd /usr/local/
 #需要注意用实际版本包 1.0.0.x 的名字
 tar xzvf buchain-1.0.0.x-linux-x64.tar.gz
-...
+```
 注册服务
 
     ln -s /usr/local/buchain/scripts/bumo /etc/init.d/bumo 
