@@ -217,122 +217,122 @@ sudo tar xzvf buchain-1.0.0.x-macOS-x64.tar.gz
 
 1、首先需要停止 bumo 程序，
 ```bash
-    service bumod stop
-    #MAC 系统没有 service 服务，直接终止 bumo 程序
+service bumod stop
+#MAC 系统没有 service 服务，直接终止 bumo 程序
 ```
 2、替换配置文件
 ```bash
-    cd /usr/local/buchain/config/
-    #拷贝目标环境配置文件
-    cp bumo-testnet.json bumo.json  
+cd /usr/local/buchain/config/
+#拷贝目标环境配置文件
+cp bumo-testnet.json bumo.json  
 
-    #配置文件环境说明
-    bumo.json           ##程序启动后默认加载的文件
-    bumo-mainnet.json   ##主网环境配置文件
-    bumo-testnet.json   ##测试网配置文件
-    bumo-single.json    ##单机节点调试环境
+#配置文件环境说明
+bumo.json           ##程序启动后默认加载的文件
+bumo-mainnet.json   ##主网环境配置文件
+bumo-testnet.json   ##测试网配置文件
+bumo-single.json    ##单机节点调试环境
 ```
 3、并清空数据库并启动服务
 ```bash
-    cd ../
-    ./bin/bumo --dropdb
-    service bumod start
+cd ../
+./bin/bumo --dropdb
+service bumod start
 
-    #MAC 系统没有 service 服务，直接使用 sudo ./bin/bumo
+#MAC 系统没有 service 服务，直接使用 sudo ./bin/bumo
 ```
 ### 运行
 
 ```bash
-    service bumod start
-    #MAC 系统没有 service 服务，直接使用 sudo ./bin/bumo
+service bumod start
+#MAC 系统没有 service 服务，直接使用 sudo ./bin/bumo
 ```
 
 ### 运行状态
 
 ```bash
-    service bumod status
-    #MAC 系统没有 service 服务
+service bumod status
+#MAC 系统没有 service 服务
 ```
 
 ### 配置
-
+```bash
 bumo.json
-
+```
 #### 数据存储
 
 ```json
-    "db":
-    {
-        "account_path": "data/account.db", //用来存储账号数据
-        "ledger_path": "data/ledger.db", //存储区块数据
-        "keyvalue_path": "data/keyvalue.db" //存储共识数据
-    }
+"db":
+{
+    "account_path": "data/account.db", //用来存储账号数据
+    "ledger_path": "data/ledger.db", //存储区块数据
+    "keyvalue_path": "data/keyvalue.db" //存储共识数据
+}
 ```
 #### 节点间网络通信
 ```json
-    "p2p":
+"p2p":
+{
+   "network_id":30000,//网络 ID
+   //共识网络
+   "consensus_network":
     {
-        "network_id":30000,//网络 ID
-        //共识网络
-        "consensus_network":
-        {
-            "heartbeat_interval":60, //心跳周期，秒
-            "listen_port":36001,//已监听的端口
-            "target_peer_connection":50,  //最大主动连接节点数
-            "known_peers":
-            [
-                "127.0.0.1:36001"//连接其他节点
-            ]
-        }
+        "heartbeat_interval":60, //心跳周期，秒
+        "listen_port":36001,//已监听的端口
+         "target_peer_connection":50,  //最大主动连接节点数
+         "known_peers":
+        [
+            "127.0.0.1:36001"//连接其他节点
+        ]
     }
+}
 ```
 
 #### WEB API 配置
 
 ```json
-    "webserver":{
-        "listen_addresses":"0.0.0.0:36002" 
-    }
+"webserver":{
+    "listen_addresses":"0.0.0.0:36002" 
+}
 ```
 
 #### WebSocket API 配置 
 
 ```json
-    "wsserver":
-    {
-        "listen_address":"0.0.0.0:36003"
-    }
+"wsserver":
+{
+    "listen_address":"0.0.0.0:36003"
+}
 ```
 
 #### 区块配置
 
 ```json
-    "ledger":
+"ledger":
+{
+    "validation_address":"buQmtDED9nFcCfRkwAF4TVhg6SL1FupDNhZY",//验证节点地址，同步节点或者钱包不需要配置
+    "validation_private_key": "e174929ecec818c0861aeb168ebb800f6317dae1d439ec85ac0ce4ccdb88487487c3b74a316ee777a3a7a77e5b12efd724cd789b3b57b063b5db0215fc8f3e89", //验证节点私钥，同步节点或者钱包不需要配置
+   "max_trans_per_ledger":1000,  //单个区块最大交易个数
+    "tx_pool":                      //交易池配置
     {
-        "validation_address":"buQmtDED9nFcCfRkwAF4TVhg6SL1FupDNhZY",//验证节点地址，同步节点或者钱包不需要配置
-        "validation_private_key": "e174929ecec818c0861aeb168ebb800f6317dae1d439ec85ac0ce4ccdb88487487c3b74a316ee777a3a7a77e5b12efd724cd789b3b57b063b5db0215fc8f3e89", //验证节点私钥，同步节点或者钱包不需要配置
-        "max_trans_per_ledger":1000,  //单个区块最大交易个数
-        "tx_pool":                      //交易池配置
-        {
-            "queue_limit":10240,            //交易池总量限制
-            "queue_per_account_txs_limit":64    //单个账号的交易缓冲最大值
-        }
+        "queue_limit":10240,            //交易池总量限制
+        "queue_per_account_txs_limit":64    //单个账号的交易缓冲最大值
     }
+}
 ```
 
 `validation_address` 和 `validation_private_key` 可以通过 bumo 程序命令行工具获得，请妥善保存该账号信息，丢失后将无法找回。
 ```bash
-    [root@bumo ~]# cd /usr/local/buchain/bin
-    [root@bumo bin]#./bumo --create-account
+[root@bumo ~]# cd /usr/local/buchain/bin
+[root@bumo bin]#./bumo --create-account
 
-    {
-        "address" : "buQmtDED9nFcCfRkwAF4TVhg6SL1FupDNhZY", //地址
-        "private_key" : "privbsZozNs3q9aixZWEUzL9ft8AYph5DixN1sQccYvLs2zPsPhPK1Pt", //私钥
-        "private_key_aes" : "e174929ecec818c0861aeb168ebb800f6317dae1d439ec85ac0ce4ccdb88487487c3b74a316ee777a3a7a77e5b12efd724cd789b3b57b063b5db0215fc8f3e89", //AES 加密的私钥
-        "public_key" : "b00108d329d5ff69a70177a60bf1b68972576b35a22d99d0b9a61541ab568521db5ee817fea6", //公钥
-        "public_key_raw" : "08d329d5ff69a70177a60bf1b68972576b35a22d99d0b9a61541ab568521db5e", //原始公钥
-        "sign_type" : "ed25519" //ed25519 加密方式
-    }
+{
+    "address" : "buQmtDED9nFcCfRkwAF4TVhg6SL1FupDNhZY", //地址
+    "private_key" : "privbsZozNs3q9aixZWEUzL9ft8AYph5DixN1sQccYvLs2zPsPhPK1Pt", //私钥
+    "private_key_aes" : "e174929ecec818c0861aeb168ebb800f6317dae1d439ec85ac0ce4ccdb88487487c3b74a316ee777a3a7a77e5b12efd724cd789b3b57b063b5db0215fc8f3e89", //AES 加密的私钥
+    "public_key" : "b00108d329d5ff69a70177a60bf1b68972576b35a22d99d0b9a61541ab568521db5ee817fea6", //公钥
+    "public_key_raw" : "08d329d5ff69a70177a60bf1b68972576b35a22d99d0b9a61541ab568521db5e", //原始公钥
+    "sign_type" : "ed25519" //ed25519 加密方式
+}
 ```
 
 ### 创世区块
