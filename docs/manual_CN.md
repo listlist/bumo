@@ -337,17 +337,17 @@ bumo.json
 
 ### 创世区块
 ```json
-   "genesis": 
-   {
-        "account": "buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3", //创世区块地址
-        "slogan" : "a new era of value",  //存储在创世区块中的标语
-        "fees": 
-        {
-            "base_reserve": 10000000,  //账号最低预留费
-            "gas_price": 1000          //字节费
-        },
-        "validators": ["buQBwe7LZYCYHfxiEGb1RE9XC9kN2qrGXWCY"] //验证节点区块列表
-    }
+"genesis": 
+{
+     "account": "buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3", //创世区块地址
+     "slogan" : "a new era of value",  //存储在创世区块中的标语
+     "fees": 
+     {
+        "base_reserve": 10000000,  //账号最低预留费
+        "gas_price": 1000          //字节费
+     },
+     "validators": ["buQBwe7LZYCYHfxiEGb1RE9XC9kN2qrGXWCY"] //验证节点区块列表
+}
 ```
 同一个区块链上的 `genesis` 配置，必须保持一致
 
@@ -355,19 +355,18 @@ bumo.json
 #### 日志配置
 
 ```json
-    "logger":
-    {
-        "path":"log/buchain.log", // 日志目录
-        "dest":"FILE|STDOUT|STDERR", //输出文件分类
-        "level":"TRACE|INFO|WARNING|ERROR|FATAL",//日志级别
-        "time_capacity":1, //时间容量，天
-        "size_capacity":10, //大小容量，兆
-        "expire_days":10  //清理日志周期，天
-    }
+"logger":
+{
+    "path":"log/buchain.log", // 日志目录
+    "dest":"FILE|STDOUT|STDERR", //输出文件分类
+    "level":"TRACE|INFO|WARNING|ERROR|FATAL",//日志级别
+    "time_capacity":1, //时间容量，天
+    "size_capacity":10, //大小容量，兆
+    "expire_days":10  //清理日志周期，天
+}
 ```
 
 #### 多节点配置示例
-
 
 以上章节介绍了配置文件的基本参数。本节以两个验证节点和一个同步节点为例，介绍多节点在一条链的配置，其中需要修改 p2p、validation 和 ledger 这三模块，具体示例如下
 
