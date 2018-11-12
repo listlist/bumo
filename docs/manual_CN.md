@@ -193,7 +193,7 @@ sudo make install
 
 ```
 cd /usr/local/
-//需要注意用实际版本包的名字
+#需要注意用实际版本包的名字
 sudo tar xzvf buchain-1.0.0.x-macOS-x64.tar.gz
 ```
 
