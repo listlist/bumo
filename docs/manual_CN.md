@@ -133,7 +133,7 @@ make install
 拷贝 buchain-`1.0.0.x`-linux-x64.tar.gz 到 /usr/local/
 
     cd /usr/local/
-    //需要注意用实际版本包 1.0.0.x 的名字
+    #需要注意用实际版本包 1.0.0.x 的名字
     tar xzvf buchain-1.0.0.x-linux-x64.tar.gz
 
 注册服务
