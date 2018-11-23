@@ -551,7 +551,10 @@ namespace bumo {
 
 		int64_t time1 = utils::Timestamp().HighResolution();
 
-		tree_->UpdateHash();
+		{
+			utils::WriteLockGuard guard(tree_mutex_);
+			tree_->UpdateHash();
+		}
 		int64_t time2 = utils::Timestamp().HighResolution();
 
 		header->set_account_tree_hash(tree_->GetRootHash());
