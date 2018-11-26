@@ -465,8 +465,8 @@ This data structure is for asset.
 
 ```
     message Asset{
-        AssetKey	key = 1;                      // Asset identification
-        int64		amount = 2;                   // Asset amount
+        AssetKey key = 1;                      // Asset identification
+        int64 amount = 2;                   // Asset amount
     }
 ```
 
