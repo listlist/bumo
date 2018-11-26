@@ -434,8 +434,8 @@ https://developers.google.com/protocol-buffers/docs/overview
 
 ```
     message Asset{
-        AssetKey	key = 1;                      // 资产标识
-        int64		amount = 2;                   // 资产数量
+        AssetKey key = 1;                      // 资产标识
+        int64 amount = 2;                   // 资产数量
     }
 ```
 
