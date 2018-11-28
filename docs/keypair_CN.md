@@ -39,7 +39,7 @@ Raw Public Key 是指通过ED25519算法对 raw private key 进行处理生成�
 3. 对第2步中得到的字节数组进行两次SHA256计算，取运算结果的前4个字节，得到校验码（Checksum）的字节数组，如下所示：
 > [30,19,80,117]
 4. 将第2步中的字节数组和第3步中的校验码字节数组按照先后顺序连接在一起，得到新的字节数组，如下所示：
-> [218,55,159,1,17,236,24,183,207,250,207,180,108,87,224,39,189,99,246,85,138,120,236,78,228,233,41,192,124,109,156,104,235,66,194,24,30,19,80,117]
+> [218,55,159,1,17,236,24,183,207,250,207,180,108,87,224,39,189,99,246,85,138,120,236,78,228,233,41,192,124,109,156,104,235,66,194,24,0,30,19,80,117]
 5. 对第4步中产生的字节数组进行Base58编码，得到以priv开始的字符串，即私钥（private key），如下所示：
 > privbsGZFUoRv8aXZbSGd3bwzZWFn3L5QKq74RXAQYcmfXhhZ54CLr9z
 
@@ -85,7 +85,7 @@ Raw Public Key 是指通过ED25519算法对 raw private key 进行处理生成�
 在生成私钥和公钥后可以进一步通过算法生成地址。生成地址包含以下步骤：
 1. 通过ED25519算法对raw private key进行处理生成32位的字节数组，即 raw public key。例如私钥为 privbsGZFUoRv8aXZbSGd3bwzZWFn3L5QKq74RXAQYcmfXhhZ54CLr9z，其raw public key 如下所示：
 > [21,118,76,208,23,224,218,117,50,113,250,38,205,82,148,81,162,27,130,83,208,1,240,212,54,18,225,158,198,50,87,10]
-2. 对 raw public key 进行两次SHA256运算，并取运算结果的后20位字节，得到字节数组，如下所示：
+2. 对 raw public key 进行一次SHA256运算，并取运算结果的后20位字节，得到字节数组，如下所示：
 > [173,148,59,51,183,193,55,160,1,133,247,80,65,13,67,190,164,114,18,220]
 3. 在第2步产生的字节数组前面加上2个字节的前缀（Prefix），然后再加上1个字节的版本号（Version），得到新的字节数组，如下所示：
 > [1,86,1,173,148,59,51,183,193,55,160,1,133,247,80,65,13,67,190,164,114,18,220]
@@ -118,7 +118,7 @@ Raw Public Key 是指通过ED25519算法对 raw private key 进行处理生成�
 私钥是：
 
 ```
-b00115764cd017e0da753271fa26cd529451a21b8253d001f0d43612e19ec632570a74ab166b
+privbsGZFUoRv8aXZbSGd3bwzZWFn3L5QKq74RXAQYcmfXhhZ54CLr9z
 ```
 
 Transaction_blob是:
@@ -127,7 +127,7 @@ Transaction_blob是:
 0A24627551566B5555424B70444B526D48595777314D553855376E676F5165686E6F31363569109F0818C0843D20E80732146275696C642073696D706C65206163636F756E743A5F08011224627551566B5555424B70444B526D48595777314D553855376E676F5165686E6F3136356922350A246275516E6936794752574D4D454376585850673854334B35615A557551456351523670691A0608011A02080128C7A3889BAB20
 ```
 
-用ED25519的签名接口对transaction_blob进行签名，并进行16进制转换后，得到的sign_data是：
+用ED25519的签名接口对待签名的交易（transaction_blob的反16进制编码得到的字节数组）进行签名，并进行16进制转换后，得到的sign_data是：
 
 ```
 a46ee590a84abdeb8cc38ade1ae8e8a2c71bb69bdc4cd7dc0de1b74b37e2cbd1696229687f80dff4276b1a3dd3f95a9bc1d569943b337fe170317430f36d6401
@@ -434,8 +434,8 @@ https://developers.google.com/protocol-buffers/docs/overview
 
 ```
     message Asset{
-        AssetKey	key = 1;                      // 资产标识
-        int64		amount = 2;                   // 资产数量
+        AssetKey key = 1;                      // 资产标识
+        int64 amount = 2;                   // 资产数量
     }
 ```
 
@@ -524,7 +524,7 @@ https://developers.google.com/protocol-buffers/docs/overview
 ```
 ### 使用示例
 
-> 本节中提供了proto脚本，以及cpp、java、javascript、pyton、object-c和php生成的proto源码的示例，详细信息请查看以下链接: https://github.com/bumoproject/bumo/tree/develop/src/proto
+> 本节中提供了proto脚本，以及c++、java、javascript、pyton、object-c和php生成的proto源码的示例，详细信息请查看以下链接: https://github.com/bumoproject/bumo/tree/develop/src/proto
 
 链接中的目录结构说明：
 
